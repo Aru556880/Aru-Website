@@ -1,6 +1,6 @@
 baseURL = 'https://Aru556880.github.io/'
 languageCode = 'en-us'
-title = 'Aru's site'
+title = "Aru's site"
 
 theme = "manis"
 
