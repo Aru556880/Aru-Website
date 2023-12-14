@@ -1,0 +1,67 @@
+{{ partial "header" . }}
+
+<article>
+	<header>
+		{{ partial "title" . }}
+		{{ with .Content }}{{.}}{{ end }}
+		
+	</header>
+	{{ $latestcount := .Site.Params.LatestCount | default 3 }}
+	<section>
+	<h2>{{ T "gameReview" }}</h2>
+		<ul class="bullet">
+			{{ $pages := where site.RegularPages "Type" "in" site.Params.gameReviewSection }}
+			
+			{{- range (first $latestcount $pages) -}}
+			{{ partial "tli" . }}
+			{{- end -}}
+		</ul>
+		
+	</section>
+</article>
+
+	<a class="c-next-post" href="/post/gamereview">Show more
+		<img class="icon-text" src="/img/next.svg"/> 
+	</a>
+
+<article>
+	
+	<section>
+	<h2>{{ T "gameDev" }}</h2>
+		<ul class="bullet">
+			{{ $pages := where site.RegularPages "Type" "in" site.Params.gameDevSection }}
+			{{- range (first $latestcount $pages) -}}
+			{{ partial "tli" . }}
+			{{- end -}}
+		</ul>
+	</section>
+</article>
+
+	<a class="c-next-post" href="/post/gameDev">Show more
+		<img class="icon-text" src="/img/next.svg"/> 
+	</a>
+
+<article>
+	<section>
+		<h4>{{ T "latestPost" }}</h4>
+		<ul class="no-bullet">
+			{{ $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+			{{- range (first $latestcount $pages) -}}
+			{{ partial "li" . }}
+			{{- end -}}
+		</ul>
+	</section>
+
+	{{ $pages := where site.RegularPages "Type" "in" .Site.Params.WorkSections }}
+	{{ if ne (len $pages) 0 }}
+	<section>
+		<h4>{{ T "latestWork" }}</h4>
+		<ul class="no-bullet">
+			{{- range (first $latestcount $pages) -}}
+			{{ partial "li" . }}
+			{{- end -}}
+		</ul>
+	</section>
+	{{ end }}
+</article>
+{{ partial "footer" . }}
